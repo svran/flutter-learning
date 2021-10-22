@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/douban/model/home_model.dart';
+import 'package:svran_flutter_study/douban/pages/home/home_movie_item.dart';
 import 'package:svran_flutter_study/douban/service/home_request.dart';
 
 class SvranHomeContent extends StatefulWidget {
@@ -29,9 +30,7 @@ class _SvranHomeContentState extends State<SvranHomeContent> {
     return ListView.builder(
       itemCount: movies.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(movies[index]?.title ?? ""),
-        );
+        return SvranHomeMovieItem(movies[index]);
       },
     );
   }
