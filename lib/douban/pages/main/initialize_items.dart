@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/douban/pages/home/home.dart';
 import 'package:svran_flutter_study/douban/pages/subject/subject.dart';
+import 'package:svran_flutter_study/main.dart';
 
 List<BottomNavigationBarItem> items = [
   BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: "首页"),
@@ -12,8 +13,8 @@ List<BottomNavigationBarItem> items = [
 
 List<Widget> pages = [
   SvranHomePage(),
+  SvranListWidget(),
   SvranSubjectPage(),
   SvranSubjectPage(),
   SvranSubjectPage(),
-  SvranSubjectPage()
 ];

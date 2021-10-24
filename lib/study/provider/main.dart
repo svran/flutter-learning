@@ -2,21 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
-import 'package:svran_flutter_study/main.dart';
 import 'package:svran_flutter_study/public_code.dart';
-import 'package:svran_flutter_study/study/provider/view_model/counter_view_model.dart';
+import 'package:svran_flutter_study/study/initalize_pages_data.dart';
+import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 
 // provider :
 // 创建自己需要共享的数据.
 // 在应用顶层 ChangeNotifierProvider .
 // 在其他位置使用共享数据.
 
-void main() => runApp(
-      ChangeNotifierProvider(
-        create: (context) => SvranCounterViewModel(),
-        child: const MyApp(),
-      ),
-    );
+void main() => runApp(MultiProvider(providers: providers, child: const MyApp()));
+//
+// void main() => runApp(
+//       ChangeNotifierProvider(
+//         create: (context) => SvranCounterViewModel(),
+//         child: const MyApp(),
+//       ),
+//     );
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -60,9 +62,7 @@ class _SvranListWidgetState extends State<SvranListWidget> {
     return Container(
       padding: const EdgeInsets.all(20),
       child: ListView.separated(
-          itemBuilder: _itemBuilder,
-          separatorBuilder: _separatorBuilder,
-          itemCount: data.length),
+          itemBuilder: _itemBuilder, separatorBuilder: _separatorBuilder, itemCount: data.length),
     );
   }
 
@@ -70,8 +70,7 @@ class _SvranListWidgetState extends State<SvranListWidget> {
     return ListTile(
       title: Text(data[index].title),
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => data[index].widget));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => data[index].widget));
       },
     );
   }

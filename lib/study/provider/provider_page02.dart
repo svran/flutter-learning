@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/public_code.dart';
-import 'package:svran_flutter_study/study/provider02/view_model/counter_view_model.dart';
-import 'package:svran_flutter_study/study/provider02/view_model/user_view_model.dart';
+import 'package:svran_flutter_study/study/provider/view_model/counter_view_model.dart';
+import 'package:svran_flutter_study/study/provider/view_model/user_view_model.dart';
 
-class ProviderPage extends StatefulWidget {
-  const ProviderPage({Key? key}) : super(key: key);
+class ProviderPage02 extends StatefulWidget {
+  const ProviderPage02({Key? key}) : super(key: key);
 
   @override
-  State<ProviderPage> createState() => _ProviderPageState();
+  State<ProviderPage02> createState() => _ProviderPage02State();
 }
 
 // 使用共享数据的三种方式和优化
@@ -16,7 +16,7 @@ class ProviderPage extends StatefulWidget {
 // 2. Consumer 当Provider 数据发生改变时, 执行 Consumer的 builder.
 // 3. Selector 1.selector 对原有数据做类型转换. 2. shouldRebuild 要不要重新构建
 
-class _ProviderPageState extends State<ProviderPage> {
+class _ProviderPage02State extends State<ProviderPage02> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

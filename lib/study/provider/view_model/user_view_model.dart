@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:svran_flutter_study/study/provider02/model/user_info.dart';
+import 'package:svran_flutter_study/study/provider/model/user_info.dart';
 
 class SvranUserViewModel extends ChangeNotifier {
   late UserInfo _user;

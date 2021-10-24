@@ -7,6 +7,7 @@ import 'package:svran_flutter_study/ext/logger/svran_pretty_printer.dart';
 var logger = Logger(
   printer: SvranPrettyPrinter(
     methodCount: 1,
+    methodCountOffset: 3,
   ), // Use the PrettyPrinter to format and print log
 );
 

@@ -1,39 +1,28 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:provider/provider.dart';
+import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
+import 'package:svran_flutter_study/study/router/about_page.dart';
+import 'package:svran_flutter_study/study/router/detail_page.dart';
+import 'package:svran_flutter_study/study/router/svran_router.dart';
+import 'package:svran_flutter_study/study/router/un_know_page.dart';
+import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
-import 'beans/svran_list_bean.dart';
-import 'first/my_home_page.dart';
 import 'public_code.dart';
-import 'study/async/async_demo.dart';
-import 'study/http_dio/http_dio_demo.dart';
-import 'study/inherited_widget/inherited_widget_page.dart';
-import 'study/layout/layout.dart';
-import 'study/provider/provider_page.dart';
-import 'study/scroll_widget/custom_sliver_view_demo.dart';
-import 'study/scroll_widget/grid_view_demo.dart';
-import 'study/scroll_widget/list_view_demo.dart';
-import 'study/scroll_widget/scroll_view_listen_demo.dart';
+import 'study/initalize_pages_data.dart';
 
-void main() => runApp(const MyApp());
-final List<SvranListBean> data = [
-  SvranListBean("状态管理 Provider", const ProviderPage()),
-  SvranListBean("状态管理 InheritedWidget", const InheritedWidgetPage()),
-  SvranListBean("网络请求 Dio", const HttpDioPage()),
-  SvranListBean("异步", const AsynchronousPage()),
-  SvranListBean("滚动监听", const ScrollViewListenPage()),
-  SvranListBean("自定义滚动控件CustomSliverView", const CustomSliverViewPage()),
-  SvranListBean("滚动控件GridView", const GridViewPage()),
-  SvranListBean("滚动控件ListView", const ListViewPage()),
-  SvranListBean("布局", const MyLayoutHomePage()),
-  SvranListBean("首次学习", const MyHomePage()),
-];
+// void main() => runApp(const MyApp());
+void main() => runApp(MultiProvider(providers: providers, child: const MyApp()));
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SvranSizeFit.init();
     return OKToast(
       animationBuilder: const Miui10AnimBuilder(),
       backgroundColor: Colors.black.withAlpha(0x99),
@@ -41,6 +30,9 @@ class MyApp extends StatelessWidget {
       position: ToastPosition.bottom,
       // dismissOtherOnShow: true,
       child: MaterialApp(
+        onUnknownRoute: SvranRouter.unknownRoute,
+        onGenerateRoute: SvranRouter.generateRoute,
+        routes: SvranRouter.routes,
         title: 'Svran Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -70,10 +62,7 @@ class _SvranListWidgetState extends State<SvranListWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      child: ListView.separated(
-          itemBuilder: _itemBuilder,
-          separatorBuilder: _separatorBuilder,
-          itemCount: data.length),
+      child: ListView.separated(itemBuilder: _itemBuilder, separatorBuilder: _separatorBuilder, itemCount: data.length),
     );
   }
 
@@ -81,8 +70,7 @@ class _SvranListWidgetState extends State<SvranListWidget> {
     return ListTile(
       title: Text(data[index].title),
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => data[index].widget));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => data[index].widget));
       },
     );
   }

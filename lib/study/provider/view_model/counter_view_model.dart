@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 // class SvranCounterViewModel with ChangeNotifier{
 // 创建 共享 的数据
+
 class SvranCounterViewModel extends ChangeNotifier {
   int _counter = 0;
 
