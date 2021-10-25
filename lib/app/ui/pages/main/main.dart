@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:svran_flutter_study/app/ui/pages/home/home_drawer.dart';
 
 import 'init_items.dart';
 
@@ -30,6 +31,7 @@ class _SvranMainScreenState extends State<SvranMainScreen> {
         currentIndex: _currentIndex,
         items: items,
       ),
+      drawer: const SvranHomeDrawer(),
     );
   }
 }

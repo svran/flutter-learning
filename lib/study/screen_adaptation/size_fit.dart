@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import '../../public_code.dart';
+
 class SvranSizeFit {
   static double physicalWidth = 0.0;
   static double physicalHeight = 0.0;
@@ -35,9 +37,6 @@ class SvranSizeFit {
 }
 
 extension FitSizeDouble on double {
-  // double rpx() {
-  //   return SvranSizeFit.toRpx(this);
-  // }
   double get rpx {
     return SvranSizeFit.toRpx(this);
   }
@@ -48,9 +47,6 @@ extension FitSizeDouble on double {
 }
 
 extension FitSizeInt on int {
-  // double rpx() {
-  //   return SvranSizeFit.toRpx(toDouble());
-  // }
   double get rpx {
     return SvranSizeFit.toRpx(toDouble());
   }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/app/core/model/category_model.dart';
-import 'package:svran_flutter_study/app/core/services/json_parse.dart';
-import 'package:svran_flutter_study/app/ui/pages/main/main.dart';
 import 'package:svran_flutter_study/app/ui/pages/meal/meal.dart';
 import 'package:svran_flutter_study/ext/toast/svran_toast.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';

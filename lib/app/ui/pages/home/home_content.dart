@@ -1,8 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/app/core/model/category_model.dart';
 import 'package:svran_flutter_study/app/core/services/json_parse.dart';
-import 'package:svran_flutter_study/public_code.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
 import 'home_category_item.dart';

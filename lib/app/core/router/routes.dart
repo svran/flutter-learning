@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/app/ui/pages/detail/detail.dart';
+import 'package:svran_flutter_study/app/ui/pages/filter/filter.dart';
 import 'package:svran_flutter_study/app/ui/pages/main/main.dart';
 import 'package:svran_flutter_study/app/ui/pages/meal/meal.dart';
 import 'package:svran_flutter_study/study/router/svran_router.dart';
@@ -14,7 +15,14 @@ class AppRoutes {
   };
 
   static final RouteFactory generateRoute = (RouteSettings settings) {
-    return null;
+    if (settings.name == SvranFilterScreen.routeName) {
+      return MaterialPageRoute(
+        builder: (context) {
+          return SvranFilterScreen();
+        },
+        fullscreenDialog: true,
+      );
+    }
   };
 
   static final RouteFactory unknownRoute = (RouteSettings settings) {

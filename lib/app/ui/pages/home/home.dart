@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:svran_flutter_study/app/ui/pages/home/home_app_bar.dart';
 import 'package:svran_flutter_study/app/ui/pages/home/home_content.dart';
-import 'package:svran_flutter_study/douban/main.dart';
+import 'package:svran_flutter_study/app/ui/pages/home/home_drawer.dart';
 
 class SvranHomeScreen extends StatelessWidget {
   const SvranHomeScreen({Key? key}) : super(key: key);
@@ -8,17 +9,7 @@ class SvranHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('没事光长'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MyApp()));
-            },
-            icon: const Icon(Icons.menu),
-          ),
-        ],
-      ),
+      appBar: SvranHomeAppBar(context),
       body: const Center(
         child: SvranHomeContent(),
       ),
