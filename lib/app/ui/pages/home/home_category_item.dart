@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/app/core/model/category_model.dart';
 import 'package:svran_flutter_study/app/core/services/json_parse.dart';
+import 'package:svran_flutter_study/app/ui/pages/main/main.dart';
+import 'package:svran_flutter_study/app/ui/pages/meal/meal.dart';
 import 'package:svran_flutter_study/ext/toast/svran_toast.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
@@ -11,10 +13,15 @@ class SvranHomeCategoryItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final id = category?.id ?? 0;
-    final bgColor = category?.getColor(id % 40) ?? Colors.brown;
+    // int 转 十六进制.
+    final colorInt = int.parse(category?.color ?? "EEEEEE", radix: 16);
+    // 将透明度 加入.
+    var cColor = (colorInt | 0xFF000000);
+
+    final bgColor = Color(cColor);
     return GestureDetector(
       onTap: () {
+        Navigator.of(context).pushNamed(SvranMealScreen.routeName, arguments: category);
         svranToast("${category?.id}");
       },
       child: Container(
@@ -33,7 +40,7 @@ class SvranHomeCategoryItemWidget extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Text(
-          category?.name ?? "",
+          category?.title ?? "",
           style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold, shadows: [
             Shadow(
               color: Colors.white,

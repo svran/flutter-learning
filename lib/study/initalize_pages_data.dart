@@ -1,3 +1,4 @@
+import 'package:svran_flutter_study/app/main.dart' as app;
 import 'package:svran_flutter_study/beans/svran_list_bean.dart';
 import 'package:svran_flutter_study/douban/pages/main/main.dart';
 import 'package:svran_flutter_study/first/my_home_page.dart';
@@ -23,6 +24,7 @@ import 'inherited_widget/inherited_widget_page.dart';
 import 'layout/layout.dart';
 
 final List<SvranListBean> data = [
+  SvranListBean("练手APP", const app.App()),
   SvranListBean("屏幕适配", const ScreenAdaptationPage()),
   SvranListBean("主题", const SvranThemeDemoPage()),
   SvranListBean("Hero动画", const HeroAnimDemoPage()),

@@ -1,23 +1,18 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:svran_flutter_study/app/core/model/category_model.dart';
-import 'package:svran_flutter_study/public_code.dart';
 
 class SvranJsonParse {
   static Future<CategoryModel> getCategoriesData() async {
     // 加载json
     final jsonRes = await rootBundle.loadString("assets/json/category.json");
-    // int 转 十六进制.
-    final colorInt = int.parse("FE0023", radix: 16);
-    // 将透明度 加入.
-    var cColor = (colorInt | 0xFF000000);
-    // await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     return CategoryModel.fromJson(json.decode(jsonRes));
   }
 }
 
+/*
 extension CategoryItemExt1 on CategoryItem {
   // Color get color {
   //   return
@@ -35,4 +30,4 @@ extension CategoryItemExt1 on CategoryItem {
     logger.e("Svran: Flutter -> 这是什么鬼? $m");
     return const Color(0xFFFFFFFF);
   }
-}
+} // */

@@ -7,7 +7,7 @@ class HttpRequest {
     baseUrl: HttpConfig.baseUrl,
     connectTimeout: HttpConfig.timeOut,
   );
-  static final Dio dio = Dio();
+  static final Dio dio = Dio(baseOptions);
 
   static Future<T> request<T>(
     String url, {
@@ -20,11 +20,11 @@ class HttpRequest {
     // 全局拦截器
     Interceptor dInter = InterceptorsWrapper(
       onRequest: (options, handler) {
-        logger.i("Svran: Flutter -> 拦截 onRequest");
+        logger.i("Svran: Flutter -> 请求拦截 ${options.baseUrl} ${options.uri}");
         handler.next(options);
       },
       onResponse: (e, handler) {
-        logger.i("Svran: Flutter -> 拦截 onResponse");
+        logger.i("Svran: Flutter -> 响应拦截");
         handler.next(e);
       },
       onError: (e, handler) {

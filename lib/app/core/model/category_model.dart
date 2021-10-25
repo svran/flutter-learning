@@ -2,25 +2,25 @@ import 'dart:convert' show json;
 
 class CategoryModel {
 
-  List<CategoryItem?>? list;
+  List<CategoryItem?>? category;
 
-  CategoryModel.fromParams({this.list});
+  CategoryModel.fromParams({this.category});
 
   factory CategoryModel(Object jsonStr) => jsonStr is String ? CategoryModel.fromJson(json.decode(jsonStr)) : CategoryModel.fromJson(jsonStr);
 
   static CategoryModel? parse(jsonStr) => ['null', '', null].contains(jsonStr) ? null : CategoryModel(jsonStr);
 
   CategoryModel.fromJson(jsonRes) {
-    list = jsonRes == null ? null : [];
+    category = jsonRes['category'] == null ? null : [];
 
-    for (var listItem in list == null ? [] : jsonRes){
-      list!.add(listItem == null ? null : CategoryItem.fromJson(listItem));
+    for (var categoryItem in category == null ? [] : jsonRes['category']){
+      category!.add(categoryItem == null ? null : CategoryItem.fromJson(categoryItem));
     }
   }
 
   @override
   String toString() {
-    return '{"json_list": $list}';
+    return '{"category": $category}';
   }
 
   String toJson() => this.toString();
@@ -28,35 +28,21 @@ class CategoryModel {
 
 class CategoryItem {
 
-  int? courseId;
-  int? id;
-  int? order;
-  int? parentChapterId;
-  int? visible;
-  bool? userControlSetTop;
-  String? name;
-  List<dynamic?>? children;
+  String? color;
+  String? id;
+  String? title;
 
-  CategoryItem.fromParams({this.courseId, this.id, this.order, this.parentChapterId, this.visible, this.userControlSetTop, this.name, this.children});
+  CategoryItem.fromParams({this.color, this.id, this.title});
 
   CategoryItem.fromJson(jsonRes) {
-    courseId = jsonRes['courseId'];
+    color = jsonRes['color'];
     id = jsonRes['id'];
-    order = jsonRes['order'];
-    parentChapterId = jsonRes['parentChapterId'];
-    visible = jsonRes['visible'];
-    userControlSetTop = jsonRes['userControlSetTop'];
-    name = jsonRes['name'];
-    children = jsonRes['children'] == null ? null : [];
-
-    for (var childrenItem in children == null ? [] : jsonRes['children']){
-      children!.add(childrenItem);
-    }
+    title = jsonRes['title'];
   }
 
   @override
   String toString() {
-    return '{"courseId": $courseId, "id": $id, "order": $order, "parentChapterId": $parentChapterId, "visible": $visible, "userControlSetTop": $userControlSetTop, "name": ${name != null?'${json.encode(name)}':'null'}, "children": $children}';
+    return '{"color": ${color != null?'${json.encode(color)}':'null'}, "id": ${id != null?'${json.encode(id)}':'null'}, "title": ${title != null?'${json.encode(title)}':'null'}}';
   }
 
   String toJson() => this.toString();
