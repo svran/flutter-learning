@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/app/core/model/meal_model.dart';
+import 'package:svran_flutter_study/app/core/view_model/meal_view_model.dart';
+import 'package:svran_flutter_study/app/core/view_model/svran_fav_view_model.dart';
 import 'package:svran_flutter_study/app/ui/pages/detail/detail.dart';
 import 'package:svran_flutter_study/app/ui/widgets/operation_item.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
@@ -80,12 +83,30 @@ class SvranMealContentListItem extends StatelessWidget {
             icon: const Icon(Icons.restaurant),
             title: "${_meal.complexStr}",
           ),
-          SvranOperationItem(
-            icon: const Icon(Icons.favorite),
-            title: "未收藏",
-          ),
+          buildFavItem(),
         ],
       ),
+    );
+  }
+
+  buildFavItem() {
+    return Consumer<SvranFavorViewModel>(
+      builder: (BuildContext context, value, Widget? child) {
+        final icon = value.isFavor(_meal) ? Icons.favorite : Icons.favorite_border;
+        final color = value.isFavor(_meal) ? Colors.red : Colors.black;
+        final title = value.isFavor(_meal) ? "已收藏" : "未收藏";
+        final favColor = value.isFavor(_meal) ? Colors.red : Colors.black;
+        return GestureDetector(
+          onTap: () {
+            value.handleMeal(_meal);
+          },
+          child: SvranOperationItem(
+            icon: Icon(icon, color: color),
+            title: title,
+            textColor: favColor,
+          ),
+        );
+      },
     );
   }
 }

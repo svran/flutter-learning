@@ -20,8 +20,8 @@ class SvranMealContent extends StatelessWidget {
     // return ConsumerWidget(category: category);
     return Selector<SvranMealViewModel, List<SvranMeal>>(shouldRebuild: (previous, next) {
       var b = listEquals(previous, next);
-      logger.d("Svran: Flutter -> 列表相同");
-      return b;
+      logger.d("Svran: Flutter -> 列表相同:$b");
+      return !b;
     }, builder: (context, value, child) {
       return ListView.builder(
         itemCount: value.length,
