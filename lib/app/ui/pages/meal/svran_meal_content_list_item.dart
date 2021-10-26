@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/app/core/model/meal_model.dart';
-import 'package:svran_flutter_study/app/core/view_model/meal_view_model.dart';
 import 'package:svran_flutter_study/app/core/view_model/svran_fav_view_model.dart';
 import 'package:svran_flutter_study/app/ui/pages/detail/detail.dart';
 import 'package:svran_flutter_study/app/ui/widgets/operation_item.dart';
@@ -45,6 +44,23 @@ class SvranMealContentListItem extends StatelessWidget {
             width: double.infinity,
             height: 250.px,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 250.px,
+                alignment: AlignmentDirectional.center,
+                child: const Text('图呢?! 图去哪儿了??'),
+              );
+            },
+            // loadingBuilder: (context, child, loadingProgress) {
+            //   if (loadingProgress?.expectedTotalBytes == loadingProgress?.cumulativeBytesLoaded &&
+            //       loadingProgress != null) {
+            //     return child;
+            //   } else {
+            //     return CircularProgressIndicator(
+            //       value: (loadingProgress?.cumulativeBytesLoaded ?? 0) * 1.0,
+            //     );
+            //   }
+            // },
           ),
         ),
         Positioned(

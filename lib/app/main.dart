@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/app/core/router/routes.dart';
@@ -37,6 +38,18 @@ class App extends StatelessWidget {
               appBarTheme: kDebugMode ? AppBarTheme(color: randomColor()) : null,
             ),
             darkTheme: AppTheme.darkTheme,
+            supportedLocales: const [
+              // 国际化支持
+              Locale("zh"),
+              Locale("en"),
+              Locale("jp"),
+            ],
+            localizationsDelegates: const [
+              // 国际化支持语言包
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
           ),
         );
       },
