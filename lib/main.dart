@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,9 +8,9 @@ import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 import 'package:svran_flutter_study/study/router/svran_router.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
+import 'config/config.dart';
 import 'generated/l10n.dart';
 import 'public_code.dart';
-import 'study/i18n/svran_localizations_delegate.dart';
 import 'study/initalize_pages_data.dart';
 
 // void main() => runApp(const MyApp());

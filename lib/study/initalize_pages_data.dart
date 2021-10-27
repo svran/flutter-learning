@@ -18,6 +18,7 @@ import 'package:svran_flutter_study/study/scroll_widget/grid_view_demo.dart';
 import 'package:svran_flutter_study/study/scroll_widget/list_view_demo.dart';
 import 'package:svran_flutter_study/study/scroll_widget/scroll_view_listen_demo.dart';
 import 'package:svran_flutter_study/study/theme/theme_page.dart';
+import 'package:svran_flutter_study/ws/main.dart';
 
 import 'async/async_demo.dart';
 import 'gesture/gesture_page.dart';
@@ -26,6 +27,7 @@ import 'inherited_widget/inherited_widget_page.dart';
 import 'layout/layout.dart';
 
 final List<SvranListBean> data = [
+  SvranListBean("新的学习 >> 补充", const WsApp()),
   SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),
   SvranListBean("练手APP", const app.App()),
