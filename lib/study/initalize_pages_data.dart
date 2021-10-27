@@ -8,6 +8,7 @@ import 'package:svran_flutter_study/study/animation/hero_anim_page.dart';
 import 'package:svran_flutter_study/study/animation/svran_anim_page.dart';
 import 'package:svran_flutter_study/study/event_bus/event_bus_page.dart';
 import 'package:svran_flutter_study/study/i18n/i18n_demo_page.dart';
+import 'package:svran_flutter_study/study/platform/method_channel.dart';
 import 'package:svran_flutter_study/study/provider/provider_page.dart';
 import 'package:svran_flutter_study/study/provider/provider_page02.dart';
 import 'package:svran_flutter_study/study/router/route_demo_page.dart';
@@ -25,6 +26,7 @@ import 'inherited_widget/inherited_widget_page.dart';
 import 'layout/layout.dart';
 
 final List<SvranListBean> data = [
+  SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),
   SvranListBean("练手APP", const app.App()),
   SvranListBean("屏幕适配", const ScreenAdaptationPage()),
