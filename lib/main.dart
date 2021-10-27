@@ -8,7 +8,6 @@ import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 import 'package:svran_flutter_study/study/router/svran_router.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
-import 'config/config.dart';
 import 'generated/l10n.dart';
 import 'public_code.dart';
 import 'study/initalize_pages_data.dart';

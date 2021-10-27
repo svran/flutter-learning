@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:svran_flutter_study/ext/toast/svran_toast.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
 import '../public_code.dart';
@@ -36,7 +37,21 @@ class WsApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         home: Scaffold(
-          appBar: AppBar(title: const Text('新的学习')),
+          appBar: AppBar(
+            title: const Text('新的学习'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  } else {
+                    svranToast("不可再返回");
+                  }
+                },
+                icon: const Icon(Icons.close),
+              ),
+            ],
+          ),
           body: const SvranWsListWidget(),
         ),
       ),
@@ -69,8 +84,8 @@ class _SvranWsListWidgetState extends State<SvranWsListWidget> {
       key: ValueKey(wsData[index].title),
       title: Text(wsData[index].title),
       leading: SizedBox(
-        width: 40.px,
-        height: 40.px,
+        width: 30.px,
+        height: 30.px,
         child: CircleAvatar(
           backgroundColor: colorByIndex(index),
           child: Text('${index + 1}'),
