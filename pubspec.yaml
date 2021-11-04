@@ -36,7 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
   logger: ^1.1.0
-  oktoast: ^3.1.3+1
+  oktoast: ^3.1.4
   dio: ^4.0.1
   provider: ^6.0.1
   event_bus: ^2.0.0
@@ -45,6 +45,7 @@ dependencies:
   file_selector: ^0.8.2+1
   file_selector_windows: ^0.0.2+1
   file_selector_web: ^0.8.1+2
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -91,15 +92,6 @@ flutter:
     - family: UDDigiKyokasho_NPB
       fonts:
         - asset: assets/fonts/UDDigiKyokasho_NPB.ttf
-
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
-        - asset: assets/fonts/Roboto/Roboto-Light.ttf
-        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
-        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
-        - asset: assets/fonts/Roboto/Roboto-Black.ttf
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

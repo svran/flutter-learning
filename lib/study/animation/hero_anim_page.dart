@@ -34,7 +34,7 @@ class _HeroAnimDemoPageState extends State<HeroAnimDemoPage> {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       // builder: (context) => const SvranModalPage(),
-                      fullscreenDialog: true,
+                      // fullscreenDialog: true,
                       pageBuilder:
                           (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
                         // return const SvranModalPage();
