@@ -4,6 +4,8 @@ A new Flutter project.
 
 ## Getting Started
 
+## 当前项目 代码格式化,请在Editor - Code style - Dart - Line length 中,设置为120.
+
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:

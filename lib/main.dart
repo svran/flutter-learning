@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/app/ui/shared/svran_pixel.dart';
+import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 import 'package:svran_flutter_study/study/router/svran_router.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
     return SvranPixel(
       builder: (context) {
         return OKToast(
-          animationBuilder: const Miui10AnimBuilder(),
+          animationBuilder: const SvranMiui10AnimBuilder(),
           backgroundColor: Colors.black.withAlpha(0x99),
           textPadding: const EdgeInsets.all(15),
           position: ToastPosition.bottom,

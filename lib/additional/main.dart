@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 
 import '../public_code.dart';
 
@@ -15,7 +16,7 @@ class AdditionalApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // SvranSizeFit.init();
     return OKToast(
-      animationBuilder: const Miui10AnimBuilder(),
+      animationBuilder: const SvranMiui10AnimBuilder(),
       backgroundColor: Colors.black.withAlpha(0x99),
       textPadding: const EdgeInsets.all(15),
       position: ToastPosition.bottom,
