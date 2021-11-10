@@ -17,9 +17,16 @@ import 'package:svran_flutter_study/ws/anim/a15/board_painter.dart';
 import 'package:svran_flutter_study/ws/key/k01/key01_no_key.dart';
 import 'package:svran_flutter_study/ws/key/k02/local_key.dart';
 import 'package:svran_flutter_study/ws/key/k03/global_key.dart';
+import 'package:svran_flutter_study/ws/key/k04/key_color_game.dart';
+import 'package:svran_flutter_study/ws/scrollable/scrollable_list.dart';
+import 'package:svran_flutter_study/ws/scrollable/scrollable_widget.dart';
 
 final List<SvranListBean> wsData = [
+  // 滚动(Scrollable) 列表
+  SvranListBean("滚动 02 其他科滚动控件", const ScrollableWidgetDemoPage()),
+  SvranListBean("滚动 01 滚动列表", const ScrollableListDemoPage()),
   // key 相关
+  SvranListBean("Key 04 实例Key,颜色排序游戏", const KeyColorGameDemoPage()),
   SvranListBean("Key 03 全局键 GlobalKey", const GlobalKeyDemoPage()),
   SvranListBean("Key 02 局部键 LocalKey", const SvranLocalKeyDemoPage()),
   SvranListBean("Key 01 没有Key会发生什么奇怪现象", const NoKeyDemoPage()),
