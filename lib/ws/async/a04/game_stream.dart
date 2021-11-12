@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../public_code.dart';
 
 class GameStreamDemoPage extends StatefulWidget {
   const GameStreamDemoPage({Key? key}) : super(key: key);
@@ -11,22 +14,54 @@ class GameStreamDemoPage extends StatefulWidget {
 }
 
 class _GameStreamDemoPageState extends State<GameStreamDemoPage> {
-  final _inputController = StreamController<int>.broadcast();
-  final _scoreController = StreamController<int>.broadcast();
-
-  int score = 0;
+  final _inputController = StreamController.broadcast();
+  final _scoreController = StreamController.broadcast();
 
   @override
   void initState() {
-    _inputController.stream.listen((event) {});
-    _scoreController.stream.listen((event) {});
+    RawKeyboard.instance.addListener(_onKey);
     super.initState();
+  }
+
+  void _onKey(RawKeyEvent event) {
+    if (event is RawKeyUpEvent) {
+      return;
+    }
+
+    final key = event.data.logicalKey;
+
+    logger.d("Svran: Flutter -> key:$key");
+
+    if (key == LogicalKeyboardKey.escape) {
+      Navigator.pop(context);
+    } else {
+      if (key == LogicalKeyboardKey.numpad1) {
+        _inputController.sink.add(1);
+      } else if (key == LogicalKeyboardKey.numpad2) {
+        _inputController.sink.add(2);
+      } else if (key == LogicalKeyboardKey.numpad3) {
+        _inputController.sink.add(3);
+      } else if (key == LogicalKeyboardKey.numpad4) {
+        _inputController.sink.add(4);
+      } else if (key == LogicalKeyboardKey.numpad5) {
+        _inputController.sink.add(5);
+      } else if (key == LogicalKeyboardKey.numpad6) {
+        _inputController.sink.add(6);
+      } else if (key == LogicalKeyboardKey.numpad7) {
+        _inputController.sink.add(7);
+      } else if (key == LogicalKeyboardKey.numpad8) {
+        _inputController.sink.add(8);
+      } else if (key == LogicalKeyboardKey.numpad9) {
+        _inputController.sink.add(9);
+      }
+    }
   }
 
   @override
   void dispose() {
     _inputController.close();
     _scoreController.close();
+    RawKeyboard.instance.removeListener(_onKey);
     super.dispose();
   }
 
@@ -36,19 +71,19 @@ class _GameStreamDemoPageState extends State<GameStreamDemoPage> {
     return Scaffold(
       appBar: AppBar(
         title: StreamBuilder<int>(
-          stream: _scoreController.stream,//.transform(streamTransformer),
+          stream: _scoreController.stream.transform(TallyTransformer<dynamic, int>()),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              score += (snapshot.data ?? 0);
+              return Text('数学计算小游戏 分数:${snapshot.data}');
             }
-            return Text('数学计算小游戏 分数:$score');
+            return const Text('数学计算小游戏');
           },
         ),
       ),
       body: Stack(
         children: [
           ...List.generate(
-              5,
+              15,
               (index) => Puzzle(
                     inputStream: _inputController.stream,
                     scoreStream: _scoreController,
@@ -64,22 +99,22 @@ class _GameStreamDemoPageState extends State<GameStreamDemoPage> {
   }
 }
 
-class TallyTransformer implements StreamTransformer {
+class TallyTransformer<d, i> implements StreamTransformer<d, i> {
   int sum = 0;
-  StreamController _controller = StreamController();
-
-  @override
-  Stream bind(Stream<dynamic> stream) {
-    stream.listen((event) {
-      sum += (event as int);
-      _controller.add(sum);
-    });
-    return _controller.stream;
-  }
+  final StreamController<i> _controller = StreamController();
 
   @override
   StreamTransformer<RS, RT> cast<RS, RT>() {
     return StreamTransformer.castFrom(this);
+  }
+
+  @override
+  Stream<i> bind(Stream<d> stream) {
+    stream.listen((event) {
+      sum += (event as int);
+      _controller.add(sum as i);
+    });
+    return _controller.stream;
   }
 }
 
@@ -110,8 +145,8 @@ class KeyPad extends StatelessWidget {
 }
 
 class Puzzle extends StatefulWidget {
-  final Stream<int> inputStream;
-  final StreamController<int> scoreStream;
+  final Stream inputStream;
+  final StreamController scoreStream;
   final double w;
 
   const Puzzle({
@@ -181,7 +216,7 @@ class _PuzzleState extends State<Puzzle> with SingleTickerProviderStateMixin {
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: color,
+              color: color.withOpacity(0.5),
               borderRadius: BorderRadius.circular(24),
               border: Border.all(color: Colors.black),
             ),
