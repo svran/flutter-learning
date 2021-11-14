@@ -20,14 +20,33 @@ class _BoardPainterDemoPageState extends State<BoardPainterDemoPage> {
       appBar: AppBar(
         title: const Text("手绘板"),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.clear),
-        onPressed: () {
-          setState(() {
-            logger.d("Svran: Flutter -> 清空了");
-            _points.clear();
-          });
-        },
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(heroTag: "垃圾",
+            child: const Icon(Icons.arrow_back),
+            onPressed: () {
+              setState(() {
+                if (_points.isNotEmpty) {
+                  _points.removeLast();
+                  while (_points.isNotEmpty && _points.last != null) {
+                    _points.removeLast();
+                  }
+                }
+              });
+            },
+          ),
+          const SizedBox(height: 10),
+          FloatingActionButton(
+            child: const Icon(Icons.clear),
+            onPressed: () {
+              setState(() {
+                logger.d("Svran: Flutter -> 清空了");
+                _points.clear();
+              });
+            },
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
