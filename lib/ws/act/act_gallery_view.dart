@@ -38,7 +38,7 @@ class _ActGalleryViewDemoPageState extends State<ActGalleryViewDemoPage> {
 }
 
 class GalleryView extends StatefulWidget {
-  final int itemCount;
+  final int? itemCount;
   final IndexedWidgetBuilder itemBuilder;
 
   final int initialPerRow;
@@ -114,7 +114,7 @@ class _GalleryViewState extends State<GalleryView> {
     return ListView.builder(
       controller: _controller,
       itemExtent: _size,
-      itemCount: (widget.itemCount / countPerRow).ceil(),
+      itemCount: widget.itemCount != null ? (widget.itemCount! / countPerRow).ceil() : null,
       itemBuilder: (context, index) {
         return OverflowBox(
           maxWidth: double.infinity,
@@ -122,7 +122,8 @@ class _GalleryViewState extends State<GalleryView> {
           child: Row(
             children: [
               for (int j = 0; j < countPerRow; j++)
-                if (index * countPerRow + j < widget.itemCount) _buildItem(context, index * countPerRow + 1),
+                if (widget.itemCount == null || index * countPerRow + j < widget.itemCount!)
+                  _buildItem(context, index * countPerRow + 1),
             ],
           ),
         );

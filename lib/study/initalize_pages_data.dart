@@ -1,5 +1,6 @@
 import 'package:svran_flutter_study/app/main.dart' as app;
 import 'package:svran_flutter_study/beans/svran_list_bean.dart';
+import 'package:svran_flutter_study/boom/boom_main.dart';
 import 'package:svran_flutter_study/douban/pages/main/main.dart';
 import 'package:svran_flutter_study/first/my_home_page.dart';
 import 'package:svran_flutter_study/study/animation/anim_builder_page.dart';
@@ -27,10 +28,11 @@ import 'inherited_widget/inherited_widget_page.dart';
 import 'layout/layout.dart';
 
 final List<SvranListBean> data = [
-  SvranListBean("新的学习 >> 补充", const WsApp()),
+  SvranListBean("新的学习 >> 补充WSBT", const WsApp()),
+  SvranListBean("玩 Boom", const SvranBoomMainPage()),
   SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),
-  SvranListBean("练手APP", const app.App()),
+  SvranListBean("练手APP >>", const app.App()),
   SvranListBean("屏幕适配", const ScreenAdaptationPage()),
   SvranListBean("主题", const SvranThemeDemoPage()),
   SvranListBean("Hero动画", const HeroAnimDemoPage()),

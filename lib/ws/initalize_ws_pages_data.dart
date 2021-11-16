@@ -4,6 +4,7 @@ import 'package:svran_flutter_study/ws/act/act_gallery_view.dart';
 import 'package:svran_flutter_study/ws/act/act_highly_used_widgets.dart';
 import 'package:svran_flutter_study/ws/act/act_hollowed_text.dart';
 import 'package:svran_flutter_study/ws/act/act_lnk_lnk_well_material.dart';
+import 'package:svran_flutter_study/ws/act/act_unpopular_widget.dart';
 import 'package:svran_flutter_study/ws/act/act_water_mark.dart';
 import 'package:svran_flutter_study/ws/act/act_will_pop_scope.dart';
 import 'package:svran_flutter_study/ws/anim/a01/animated_widget.dart';
@@ -50,6 +51,7 @@ final List<SvranListBean> wsData = [
   SvranListBean("滚动 02 其他Sliver滚动组件", const Sliver02DemoPage()),
   SvranListBean("滚动 01 滚动视窗 CustomScrollView", const Sliver01DemoPage()),
   // 其他
+  SvranListBean("练习 08 冷门Flutter组件", const ActUnpopularWidgetDemoPage()),
   SvranListBean("练习 07 支持捏拉缩放手势的网格列表", const ActGalleryViewDemoPage()),
   SvranListBean("练习 06 一些使用率高的组件", const HighlyUsedWidgetDemoPage()),
   SvranListBean("练习 05 WillPopScope", const AddWillPopScopeDemoPage()),
