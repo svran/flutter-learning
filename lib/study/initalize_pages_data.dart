@@ -29,7 +29,7 @@ import 'layout/layout.dart';
 
 final List<SvranListBean> data = [
   SvranListBean("新的学习 >> 补充WSBT", const WsApp()),
-  SvranListBean("玩 Boom", const SvranBoomMainPage()),
+  SvranListBean("好玩的效果 点击 Boom! 炸开", const SvranBoomMainPage()),
   SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),
   SvranListBean("练手APP >>", const app.App()),
