@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/app/main.dart' as app;
 import 'package:svran_flutter_study/beans/svran_list_bean.dart';
 import 'package:svran_flutter_study/boom/boom_main.dart';
 import 'package:svran_flutter_study/douban/pages/main/main.dart';
 import 'package:svran_flutter_study/first/my_home_page.dart';
+import 'package:svran_flutter_study/hyu1996/object_def_view.dart';
 import 'package:svran_flutter_study/study/animation/anim_builder_page.dart';
 import 'package:svran_flutter_study/study/animation/anim_page.dart';
 import 'package:svran_flutter_study/study/animation/hero_anim_page.dart';
@@ -30,6 +32,7 @@ import 'layout/layout.dart';
 final List<SvranListBean> data = [
   SvranListBean("新的学习 >> 补充WSBT", const WsApp()),
   SvranListBean("好玩的效果 点击 Boom! 炸开", const SvranBoomMainPage()),
+  SvranListBean("hyu1996 conf", Scaffold(body: ObjectDefView())),
   SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),
   SvranListBean("练手APP >>", const app.App()),
