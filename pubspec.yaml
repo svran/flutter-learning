@@ -32,22 +32,23 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+    # The following adds the Cupertino Icons font to your application.
+    # Use with the CupertinoIcons class for iOS style icons.
+#  webview_flutter: ^2.3.1
+#  webview_windows: ^0.0.8
   cupertino_icons: ^1.0.4
   logger: ^1.1.0
   oktoast: ^3.1.5
-  dio: ^4.0.3
+  dio: ^4.0.4
   provider: ^6.0.1
   event_bus: ^2.0.0
-#  webview_flutter: ^2.1.2
-#  webview_windows: ^0.0.8
   file_selector: ^0.8.2+1
   file_selector_windows: ^0.0.2+1
   file_selector_web: ^0.8.1+2
   google_fonts: ^2.1.0
   flare_flutter: ^3.0.2
   http:
+  table_calendar:
 
 dev_dependencies:
   flutter_test:
