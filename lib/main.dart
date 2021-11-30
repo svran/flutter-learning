@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/app/ui/shared/svran_pixel.dart';
+import 'package:svran_flutter_study/boom/widget/boom_widget.dart';
 import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 import 'package:svran_flutter_study/study/router/svran_router.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
               appBar: AppBar(
                 title: const Text("这是我学习Flutter的记录"),
               ),
-              body: const SvranListWidget(),
+              body: SvranClickBoomWidget(child: const SvranListWidget()),
             ),
             supportedLocales: S.delegate.supportedLocales,
             // const [

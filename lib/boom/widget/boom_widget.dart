@@ -1,89 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:svran_flutter_study/ext/toast/svran_toast.dart';
 
-import '../public_code.dart';
-
-/// 仿制效果 : https://www.qiyuandi.com/zhanzhang/zonghe/14066.html 网页的点击特效
-class SvranBoomCanvasPage extends StatefulWidget {
-  const SvranBoomCanvasPage({Key? key}) : super(key: key);
-
-  @override
-  State<SvranBoomCanvasPage> createState() => _SvranBoomCanvasPageState();
-}
-
-class _SvranBoomCanvasPageState extends State<SvranBoomCanvasPage> {
-  int pointCount = 60;
-
-  _changePoint(int addCount) {
-    pointCount += addCount;
-    if (pointCount >= 500) {
-      pointCount = 500;
-    }
-    if (pointCount < 0) {
-      pointCount = 10;
-    }
-    svranToast("点数:$pointCount");
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("点击Boom效果"),
-      ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: "add",
-            tooltip: "增加10个点",
-            child: const Icon(Icons.add),
-            onPressed: () => _changePoint(10),
-          ),
-          const SizedBox(height: 20),
-          FloatingActionButton(
-            heroTag: "sub",
-            tooltip: "减少10个点",
-            child: const Icon(Icons.remove),
-            onPressed: () => _changePoint(-10),
-          ),
-          const SizedBox(height: 20),
-          FloatingActionButton(
-            heroTag: "refresh",
-            tooltip: "减少10个点",
-            child: const Icon(Icons.refresh),
-            onPressed: () {
-              pointCount = 60;
-              svranToast("点数:$pointCount");
-              setState(() {});
-            },
-          ),
-        ],
-      ),
-      body: SvranClickBoomWidget(
-        longPressBoomDuration: const Duration(seconds: 1),
-        pointCount: pointCount,
-        child: Center(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                svranToast("点击了这个按钮");
-              },
-              child: Text('点击'),
-            ),
-            Text('这效果是使用 CustomPaint 自己在Canvas中绘制而成.\n 现在点数: $pointCount'),
-          ],
-        )),
-      ),
-    );
-  }
-}
-
+/// 点击特效
 class SvranClickBoomWidget extends StatefulWidget {
   final int pointCount;
   final Duration duration;
@@ -136,7 +55,6 @@ class _SvranClickBoomWidgetState extends State<SvranClickBoomWidget> with Single
   }
 
   _longPressUp(BoxConstraints constraints, {details}) {
-    logger.d("Svran: Flutter -> 长按抬起");
     _big = true;
     if (details != null) pressPoint = details.localPosition;
     var durationTime = DateTime.now().difference(startTime).inMilliseconds;
@@ -152,7 +70,6 @@ class _SvranClickBoomWidgetState extends State<SvranClickBoomWidget> with Single
   }
 
   _tapDown(BoxConstraints constraints, details) {
-    logger.d("Svran: Flutter -> 按下 $constraints -> ${details.localPosition}");
     _big = false;
     pressPoint = details.localPosition;
     for (var i = 0; i < circles.length; i++) {
@@ -241,7 +158,7 @@ class _Circle {
   double r = 0; // 半径
   double distance = 0; // 距离
   double radian = 0; // 弧度
-  Color color = randomColor(); // 颜色
+  Color color = _randomColor(); // 颜色
   Offset offset = Offset.zero; // 坐标
   Offset offsetCurrent = Offset.zero; // 坐标
   double rCurrent = 0; // 半径
@@ -256,7 +173,7 @@ class _Circle {
     r = radius - (Random().nextDouble() * (radius - radius * 0.2));
     distance = baseDistance - Random().nextDouble() * (baseDistance - baseDistance * 0.4);
     radian = Random().nextDouble() * 2 * pi;
-    color = randomColor();
+    color = _randomColor();
     var dx = point.dx + distance * cos(radian);
     var dy = point.dy + distance * sin(radian);
     offset = Offset(dx, dy);
@@ -264,11 +181,11 @@ class _Circle {
   }
 }
 
-// randomColor() {
-//   return Color.fromARGB(
-//     255,
-//     Random.secure().nextInt(255),
-//     Random.secure().nextInt(255),
-//     Random.secure().nextInt(255),
-//   );
-// }
+_randomColor() {
+  return Color.fromARGB(
+    255,
+    Random.secure().nextInt(255),
+    Random.secure().nextInt(255),
+    Random.secure().nextInt(255),
+  );
+}
