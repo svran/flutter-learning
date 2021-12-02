@@ -63,7 +63,7 @@ class _SvranClickBoomWidgetState extends State<SvranClickBoomWidget> with Single
     }
     for (var element in circles) {
       double s = (durationTime / widget.longPressBoomDuration.inMilliseconds);
-      var baseDistance = widget.minDistance + (constraints.biggest.shortestSide - widget.minDistance) * s;
+      var baseDistance = widget.minDistance + (constraints.biggest.longestSide - widget.minDistance) * s;
       element.reset(pressPoint, baseDistance: baseDistance);
     }
     _controller.forward(from: 0.0);

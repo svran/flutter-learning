@@ -6,7 +6,7 @@ class SvranGameCard {
   int value;
   int max;
   int min;
-  int cardType;
+  SvranGameCardType cardType;
 
   SvranGameCard(this.name, this.cardDesc, this.cardImgPath, this.cardId, this.value, this.max, this.min, this.cardType);
 }

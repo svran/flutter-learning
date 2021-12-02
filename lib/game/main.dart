@@ -1,15 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:svran_flutter_study/boom/widget/boom_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 import 'package:svran_flutter_study/game/home/game_page.dart';
+import 'package:svran_flutter_study/game/route/routes.dart';
 import 'package:svran_flutter_study/public_code.dart';
 
-import 'init_providers.dart';
+import 'providers/init_providers.dart';
 
 void main() => runApp(MultiProvider(providers: providers, child: const GameAwWxApp()));
 // void main() => runApp(const GameAwWxApp());
@@ -27,6 +26,7 @@ class GameAwWxApp extends StatelessWidget {
       position: ToastPosition.bottom,
       // dismissOtherOnShow: true,
       child: MaterialApp(
+        routes: GameRoute.routes,
         // onUnknownRoute: AppRoutes.routes,
         title: 'CreateBySvran',
         theme: ThemeData(
