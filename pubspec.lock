@@ -240,7 +240,14 @@ packages:
       name: google_fonts
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
+  hive:
+    dependency: "direct main"
+    description:
+      name: hive
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.5"
   http:
     dependency: "direct main"
     description:
@@ -311,6 +318,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.12.11"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.2"
   meta:
     dependency: transitive
     description:
@@ -546,21 +560,21 @@ packages:
       name: test
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.19.3"
+    version: "1.19.5"
   test_api:
     dependency: transitive
     description:
       name: test_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.7"
+    version: "0.4.8"
   test_core:
     dependency: transitive
     description:
       name: test_core
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.8"
+    version: "0.4.9"
   typed_data:
     dependency: transitive
     description:

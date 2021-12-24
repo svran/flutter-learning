@@ -4,7 +4,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 import 'package:svran_flutter_study/public_code.dart';
-import 'package:svran_flutter_study/study/initalize_pages_data.dart';
+import 'package:svran_flutter_study/study/initialize_pages_data.dart';
 import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 
 // provider :

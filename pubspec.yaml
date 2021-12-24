@@ -45,10 +45,11 @@ dependencies:
   file_selector: ^0.8.2+1
   file_selector_windows: ^0.0.2+1
   file_selector_web: ^0.8.1+2
-  google_fonts: ^2.1.0
+  google_fonts: ^2.1.1
   flare_flutter: ^3.0.2
   http:
   table_calendar:
+  hive: ^2.0.5
 
 dev_dependencies:
   flutter_test:

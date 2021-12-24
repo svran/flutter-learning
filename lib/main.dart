@@ -12,7 +12,7 @@ import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 
 import 'generated/l10n.dart';
 import 'public_code.dart';
-import 'study/initalize_pages_data.dart';
+import 'study/initialize_pages_data.dart';
 
 // void main() => runApp(const MyApp());
 void main() => runApp(MultiProvider(providers: providers, child: const MyApp()));

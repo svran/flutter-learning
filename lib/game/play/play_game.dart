@@ -26,11 +26,11 @@ class _SvranPlayPageState extends State<SvranPlayPage> {
       body: SvranClickBoomWidget(
         child: Column(
           children: [
-            Expanded(flex: 2, child: Container(child: _buildTop())),
+            Expanded(flex: 3, child: Container(child: _buildTop())),
             Divider(color: Colors.grey),
-            Expanded(flex: 1, child: Container(child: _buildCenter())),
+            Expanded(flex: 2, child: Container(child: _buildCenter())),
             Divider(color: Colors.grey),
-            Expanded(flex: 2, child: Container(child: _buildBottom()))
+            Expanded(flex: 4, child: Container(child: _buildBottom()))
           ],
         ),
       ),
