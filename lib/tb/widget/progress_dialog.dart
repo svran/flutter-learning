@@ -135,8 +135,8 @@ class CustomDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minWidth: 280.0),
+          // child: ConstrainedBox(
+          //   constraints: const BoxConstraints(minWidth: 280.0),
             child: Material(
               color: backgroundColor ?? dialogTheme.backgroundColor ?? Theme.of(context).dialogBackgroundColor,
               elevation: elevation ?? dialogTheme.elevation ?? _defaultElevation,
@@ -145,7 +145,7 @@ class CustomDialog extends StatelessWidget {
               child: child,
             ),
           ),
-        ),
+        // ),
       ),
     );
   }
