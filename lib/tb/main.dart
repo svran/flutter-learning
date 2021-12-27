@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:svran_flutter_study/boom/widget/boom_widget.dart';
 import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
 import 'package:svran_flutter_study/tb/pages/tb_list_page.dart';
@@ -39,7 +40,7 @@ class App extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        home: TbListPage(),
+        home: const TbListPage(),
       ),
     );
   }

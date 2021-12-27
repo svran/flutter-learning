@@ -18,8 +18,8 @@ class _SvranBoomCanvasPageState extends State<SvranBoomCanvasPage> {
 
   _changePoint(int addCount) {
     pointCount += addCount;
-    if (pointCount >= 500) {
-      pointCount = 500;
+    if (pointCount >= 5000) {
+      pointCount = 5000;
     }
     if (pointCount < 0) {
       pointCount = 10;
@@ -37,6 +37,13 @@ class _SvranBoomCanvasPageState extends State<SvranBoomCanvasPage> {
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          FloatingActionButton(
+            heroTag: "add100",
+            tooltip: "增加100个点",
+            child: const Icon(Icons.add_circle_outline),
+            onPressed: () => _changePoint(100),
+          ),
+          const SizedBox(height: 20),
           FloatingActionButton(
             heroTag: "add",
             tooltip: "增加10个点",
