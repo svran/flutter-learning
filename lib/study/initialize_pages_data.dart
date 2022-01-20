@@ -24,8 +24,11 @@ import 'package:svran_flutter_study/study/scroll_widget/list_view_demo.dart';
 import 'package:svran_flutter_study/study/scroll_widget/scroll_view_listen_demo.dart';
 import 'package:svran_flutter_study/study/theme/theme_page.dart';
 import 'package:svran_flutter_study/tb/pages/tb_list_page.dart';
+import 'package:svran_flutter_study/third/three_d/banner_page.dart';
+import 'package:svran_flutter_study/third/video/k_p.dart';
 import 'package:svran_flutter_study/ws/main.dart';
 
+import '../third/video/player_vlc.dart';
 import 'async/async_demo.dart';
 import 'gesture/gesture_page.dart';
 import 'http_dio/http_dio_demo.dart';
@@ -34,10 +37,13 @@ import 'layout/layout.dart';
 
 final List<SvranListBean> data = [
   SvranListBean("新的学习 >> 补充WSBT", const WsApp()),
+  SvranListBean("测试 KP", const KaPlayer()),
+  SvranListBean("测试VLC", const VlcDemo()),
   SvranListBean("管理钛备份文件 >>", const TbListPage()),
   SvranListBean("好玩的效果 点击 Boom! 炸开", const SvranBoomMainPage()),
   SvranListBean("好玩的效果 点击 Boom! 炸开 Canvas", const SvranBoomCanvasPage()),
   SvranListBean("血条", const SvranBloodBarDemoPage()),
+  SvranListBean("三方 >>", const BannerPage()),
   SvranListBean("hyu1996 conf", Scaffold(body: ObjectDefView())),
   SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),
