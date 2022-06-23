@@ -39,7 +39,7 @@ class _SvranPixelState extends State<SvranPixel> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final data = MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+    final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
     SvranSizeFit.init();
     return _SvranPixelInherited(
       data: data,

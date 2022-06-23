@@ -40,8 +40,11 @@ import 'package:svran_flutter_study/ws/slivers/s04/sliver_04.dart';
 import 'package:svran_flutter_study/ws/slivers/s05/listview_to_sliver.dart';
 import 'package:svran_flutter_study/ws/slivers/s06/sliver_persistent_header.dart';
 import 'package:svran_flutter_study/ws/slivers/s07/sliver_list.dart';
+import 'package:svran_flutter_study/ws/supplement/supplement_01.dart';
 
 final List<SvranListBean> wsData = [
+  // 补充
+  SvranListBean("补充 01 写个球 ", const ThreeDBallPage()),
   // 滚动
   SvranListBean("滚动 07 设计一个有SliverAppBar的页面 ", const SliverListInstanceDemoPage()),
   SvranListBean("滚动 06 SliverPersistentHeader的使用", const SliverPersistentHeaderSliverListDemoPage()),
