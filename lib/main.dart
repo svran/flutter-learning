@@ -1,4 +1,3 @@
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,6 +9,7 @@ import 'package:svran_flutter_study/ext/toast/miui_10_anim_builder.dart';
 import 'package:svran_flutter_study/study/provider/initialize_providers.dart';
 import 'package:svran_flutter_study/study/router/svran_router.dart';
 import 'package:svran_flutter_study/study/screen_adaptation/size_fit.dart';
+import 'package:svran_flutter_study/tb/pages/tb_list_page.dart';
 
 import 'generated/l10n.dart';
 import 'public_code.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SvranSizeFit.init();
     // Player.boot();
-    DartVLC.initialize();
+    // DartVLC.initialize();
     return SvranPixel(
       builder: (context) {
         return OKToast(
@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
               appBarTheme: kDebugMode ? AppBarTheme(color: randomColor()) : null,
               fontFamily: "Roboto",
             ),
+            // home: const TbListPage(),
             home: Scaffold(
               appBar: AppBar(
                 title: const Text("这是我学习Flutter的记录"),

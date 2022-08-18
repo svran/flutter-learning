@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:svran_flutter_study/ext/toast/svran_toast.dart';
 import 'package:svran_flutter_study/tb/model/properties_model.dart';
 import 'package:svran_flutter_study/tb/pages/apk_list_page.dart';
+import 'package:svran_flutter_study/tb/pages/key_test.dart';
 import 'package:svran_flutter_study/tb/properties.dart';
 import 'package:svran_flutter_study/tb/widget/progress_dialog.dart';
 
@@ -54,6 +55,14 @@ class _TbListPageState extends State<TbListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("备份"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => KeyTest(title: "按键测试")));
+            },
+            icon: const Icon(Icons.close),
+          )
+        ],
       ),
       body: SvranClickBoomWidget(
         child: Column(
@@ -88,10 +97,13 @@ class _TbListPageState extends State<TbListPage> {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   final item = tbFileList[index];
+                  var size = getTotalSize(item.value);
                   return ListTile(
                     leading: item.value[0].iconWidget,
                     title: Text(item.value[0].app_gui_label),
-                    subtitle: Text("有${item.value.length}个备份"),
+                    subtitle: (size <= 0)
+                        ? const Text('备份已删除(仅剩下信息文件)')
+                        : Text("有${item.value.length}个数据备份 , 总大小 ${_sizeStr(size)}"),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                         return SvranTbApkListPage(propertiesList: item.value, tbFileListIndex: index);
@@ -107,6 +119,28 @@ class _TbListPageState extends State<TbListPage> {
         ),
       ),
     );
+  }
+
+  String _sizeStr(int limit) {
+    if (limit <= 0) return "❌";
+    //内存转换
+    if (limit < 1 * 1024) {
+      //小于0.1KB，则转化成B
+      var size = limit.toStringAsFixed(2);
+      return "$size B";
+    } else if (limit < 1 * 1024 * 1024) {
+      //小于0.1MB，则转化成KB
+      var size = (limit / 1024).toStringAsFixed(2);
+      return "$size KB";
+    } else if (limit < 1 * 1024 * 1024 * 1024) {
+      //小于0.1GB，则转化成MB
+      var size = (limit / (1024 * 1024)).toStringAsFixed(2);
+      return "$size MB";
+    } else {
+      //其他转化成GB
+      var size = (limit / (1024 * 1024 * 1024)).toStringAsFixed(2);
+      return "$size GB";
+    }
   }
 
   openFile({bool refresh = false}) async {
@@ -142,6 +176,13 @@ class _TbListPageState extends State<TbListPage> {
         }
       }
       tbFileList = tbFileMap.entries.toList();
+      tbFileList.sort((a, b) {
+        List<PropertiesModel> ap = a.value;
+        List<PropertiesModel> bp = b.value;
+        var aSize = getTotalSize(ap);
+        var bSize = getTotalSize(bp);
+        return bSize.compareTo(aSize);
+      });
       setState(() {});
     } catch (error) {
       if (error.runtimeType == FileSystemException) {
@@ -150,5 +191,18 @@ class _TbListPageState extends State<TbListPage> {
       }
       svranToast("错误:$error");
     }
+  }
+
+  int getTotalSize(List<PropertiesModel> list) {
+    var size = 0;
+    var lastApkName = "";
+    for (var i = 0; i < list.length; ++i) {
+      if (lastApkName != list[i].app_apk_md5) {
+        size = list[i].apkSize;
+        lastApkName = list[i].app_apk_md5;
+      }
+      size += list[i].dataSize;
+    }
+    return size;
   }
 }

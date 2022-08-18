@@ -17,13 +17,13 @@ class _SvranPixelState extends State<SvranPixel> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     super.dispose();
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   static MediaQueryData? of(BuildContext ctx) {
@@ -33,7 +33,7 @@ class _SvranPixelState extends State<SvranPixel> with WidgetsBindingObserver {
   @override
   void didChangeMetrics() {
     setState(() {
-      RendererBinding.instance!.scheduleWarmUpFrame();
+      RendererBinding.instance.scheduleWarmUpFrame();
     });
   }
 

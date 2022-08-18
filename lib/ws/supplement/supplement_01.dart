@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:svran_flutter_study/public_code.dart';
 
 class ThreeDBallPage extends StatefulWidget {
   const ThreeDBallPage({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _ThreeDBallPageState extends State<ThreeDBallPage> {
       body: GestureDetector(
         onPanUpdate: (details) {
           setState(() {
+            logger.d("Svran: Flutter -> ${details.delta}");
             _offset += details.delta;
           });
         },
@@ -63,7 +65,7 @@ class MyPainter extends CustomPainter {
         double rzy = sin(rz) * ryx + cos(rz) * ryy;
         double rzz = ryz;
 
-        canvas.drawCircle(Offset(rzx, rzy), 1,
+        canvas.drawCircle(Offset(rzx, rzy), 0.6,
             Paint()..color = Color.fromARGB(255, 255, i * 255 ~/ resolution, j * 255 ~/ resolution));
       }
     }

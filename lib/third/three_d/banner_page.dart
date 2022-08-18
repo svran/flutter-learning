@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_interactional_widget/flutter_interactional_widget.dart';
+import 'package:svran_flutter_study/third/three_d/flutter_interactional_widget.dart';
 import 'package:svran_flutter_study/third/three_d/full_screen_page.dart';
 
 class BannerPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _BannerPageState extends State<BannerPage> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 37,
           ),
           banner(),
@@ -27,6 +27,7 @@ class _BannerPageState extends State<BannerPage> {
     );
   }
 
+  // /*
   Widget banner() {
     return InteractionalWidget(
       width: MediaQuery.of(context).size.width,
@@ -40,7 +41,7 @@ class _BannerPageState extends State<BannerPage> {
       middleWidget: middleWidget(),
       foregroundWidget: foregroundWidget(),
     );
-  }
+  } // */
 
   Widget contentWidget() {
     return GestureDetector(

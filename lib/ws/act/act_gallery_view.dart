@@ -78,7 +78,7 @@ class _GalleryViewState extends State<GalleryView> {
         if (constraints.maxWidth != _maxWidth) {
           _maxWidth = constraints.maxWidth;
           _size = _maxWidth / widget.initialPerRow;
-          WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
             _snapToGrid();
           });
         }

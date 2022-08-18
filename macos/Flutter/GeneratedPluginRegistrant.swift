@@ -5,10 +5,10 @@
 import FlutterMacOS
 import Foundation
 
-import dart_vlc
+import file_selector_macos
 import path_provider_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  DartVlcPlugin.register(with: registry.registrar(forPlugin: "DartVlcPlugin"))
+  FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
 }

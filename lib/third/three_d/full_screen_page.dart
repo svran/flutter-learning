@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_interactional_widget/flutter_interactional_widget.dart';
+import 'package:svran_flutter_study/third/three_d/flutter_interactional_widget.dart';
 
 class FullScreenPage extends StatefulWidget {
   const FullScreenPage({Key? key}) : super(key: key);
@@ -12,18 +12,7 @@ class _FullScreenPageState extends State<FullScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: InteractionalWidget(
-        maxAngleX: 30,
-        maxAngleY: 80,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        middleScale: 1,
-        foregroundScale: 1.1,
-        backgroundScale: 1.1,
-        backgroundWidget: backgroundWidget(),
-        middleWidget: middleWidget(),
-        foregroundWidget: foregroundWidget(),
-      ),
+      body: buildBody(),
     );
   }
 
@@ -55,4 +44,20 @@ class _FullScreenPageState extends State<FullScreenPage> {
       scale: 3.0,
     );
   }
+
+  // /*
+  buildBody() {
+    return InteractionalWidget(
+      maxAngleX: 30,
+      maxAngleY: 80,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      middleScale: 1,
+      foregroundScale: 1.1,
+      backgroundScale: 1.1,
+      backgroundWidget: backgroundWidget(),
+      middleWidget: middleWidget(),
+      foregroundWidget: foregroundWidget(),
+    );
+  } // */
 }

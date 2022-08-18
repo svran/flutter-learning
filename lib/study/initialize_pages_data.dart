@@ -43,7 +43,7 @@ final List<SvranListBean> data = [
   SvranListBean("好玩的效果 点击 Boom! 炸开", const SvranBoomMainPage()),
   SvranListBean("好玩的效果 点击 Boom! 炸开 Canvas", const SvranBoomCanvasPage()),
   SvranListBean("血条", const SvranBloodBarDemoPage()),
-  SvranListBean("三方 >>", const BannerPage()),
+  SvranListBean("裸眼3D >>", const BannerPage()),
   SvranListBean("hyu1996 conf", Scaffold(body: ObjectDefView())),
   SvranListBean("原生插件 MethodChannel", const SvranMethodChannel()),
   SvranListBean("国际化适配", const SvranI18nDemoPage()),

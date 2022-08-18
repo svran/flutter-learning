@@ -5,8 +5,6 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:svran_flutter_study/tb/properties.dart';
 
-import '../../public_code.dart';
-
 class PropertiesModel {
   String? _app_gui_label;
   String? _app_label;
@@ -76,8 +74,15 @@ class PropertiesModel {
     // logger.d("Svran: Flutter -> time:$time");
     iconWidget = app_gui_icon == null ? const Icon(Icons.android, size: 50) : Image.memory(base64Decode(app_gui_icon!));
     propertiesFile = File(path);
-    dataFile = File(path.replaceAll(".properties", ".tar.gz"));
+    dataFile = File(path.replaceAll(".properties", ".tar"));
+    if (!dataFile.existsSync()) dataFile = File(path.replaceAll(".properties", ".tar.gz"));
+    if (!dataFile.existsSync()) dataFile = File(path.replaceAll(".properties", ".tar.bz2"));
+    if (!dataFile.existsSync()) dataFile = File(path.replaceAll(".properties", ".tar.lzop"));
+
     apkFile = File("$dir\\$packageName-$app_apk_md5.apk.gz");
+    if (!apkFile.existsSync()) apkFile = File("$dir\\$packageName-$app_apk_md5.apk.bz2");
+    if (!apkFile.existsSync()) apkFile = File("$dir\\$packageName-$app_apk_md5.apk.lzop");
+    if (!apkFile.existsSync()) apkFile = File("$dir\\$packageName-$app_apk_md5.apk");
     apkSize = apkFile.existsSync() ? apkFile.lengthSync() : 0;
     dataSize = dataFile.existsSync() ? dataFile.lengthSync() : 0;
     totalSize = apkSize + dataSize;
@@ -87,19 +92,27 @@ class PropertiesModel {
 
   String dataSizeStr() => _sizeStr(dataSize);
 
-  String totalSizeStr() => _sizeStr(totalSize);
+  String totalSizeStr() => _sizeStr(apkSize + dataSize);
 
-  String _sizeStr(int size) {
-    if (size <= 0) {
-      return "/";
-    } else if (size >= 0 && size < 1024) {
-      return "${size}B";
-    } else if (size > 1024 && size < 1024 * 1024) {
-      return "${size ~/ 1024}KB";
-    } else if (size > (1024 * 1024) && size < 1024 * 1024 * 1024) {
-      return "${size / 1024 ~/ 1024}MB";
+  String _sizeStr(int limit) {
+    if (limit == 0) return "❌";
+    //内存转换
+    if (limit < 1 * 1024) {
+      //小于0.1KB，则转化成B
+      var size = limit.toStringAsFixed(2);
+      return "$size B";
+    } else if (limit < 1 * 1024 * 1024) {
+      //小于0.1MB，则转化成KB
+      var size = (limit / 1024).toStringAsFixed(2);
+      return "$size KB";
+    } else if (limit < 1 * 1024 * 1024 * 1024) {
+      //小于0.1GB，则转化成MB
+      var size = (limit / (1024 * 1024)).toStringAsFixed(2);
+      return "$size MB";
     } else {
-      return "${size / 1024 / 1024 ~/ 1024}GB";
+      //其他转化成GB
+      var size = (limit / (1024 * 1024 * 1024)).toStringAsFixed(2);
+      return "$size GB";
     }
   }
 
