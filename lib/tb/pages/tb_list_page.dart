@@ -60,7 +60,7 @@ class _TbListPageState extends State<TbListPage> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => KeyTest(title: "按键测试")));
             },
-            icon: const Icon(Icons.close),
+            icon: const Icon(Icons.info_outline),
           )
         ],
       ),

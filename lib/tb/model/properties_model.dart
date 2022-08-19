@@ -21,8 +21,8 @@ class PropertiesModel {
   late String dir;
 
   PropertiesModel(this.file, Properties properties) {
-    final p = file.path.split("\\")..removeLast();
-    dir = p.join("\\");
+    final p = file.path.replaceAll("\\", "/").split("/")..removeLast();
+    dir = p.join("/");
     _app_apk_location = properties["app_apk_location"];
     _app_is_system = properties["app_is_system"];
     _app_gui_icon = properties["app_gui_icon"]?.replaceAll("\\", "=");
@@ -60,7 +60,7 @@ class PropertiesModel {
 
   void _extData() {
     final path = file.path;
-    String fileName = path.split("\\").last;
+    String fileName = path.replaceAll("\\", "/").split("/").last;
     String fileLast = fileName.split("-").last;
     List<String> fileNameSplit = fileName.split("-");
     packageName = fileNameSplit.first;
@@ -79,10 +79,10 @@ class PropertiesModel {
     if (!dataFile.existsSync()) dataFile = File(path.replaceAll(".properties", ".tar.bz2"));
     if (!dataFile.existsSync()) dataFile = File(path.replaceAll(".properties", ".tar.lzop"));
 
-    apkFile = File("$dir\\$packageName-$app_apk_md5.apk.gz");
-    if (!apkFile.existsSync()) apkFile = File("$dir\\$packageName-$app_apk_md5.apk.bz2");
-    if (!apkFile.existsSync()) apkFile = File("$dir\\$packageName-$app_apk_md5.apk.lzop");
-    if (!apkFile.existsSync()) apkFile = File("$dir\\$packageName-$app_apk_md5.apk");
+    apkFile = File("$dir/$packageName-$app_apk_md5.apk.gz");
+    if (!apkFile.existsSync()) apkFile = File("$dir/$packageName-$app_apk_md5.apk.bz2");
+    if (!apkFile.existsSync()) apkFile = File("$dir/$packageName-$app_apk_md5.apk.lzop");
+    if (!apkFile.existsSync()) apkFile = File("$dir/$packageName-$app_apk_md5.apk");
     apkSize = apkFile.existsSync() ? apkFile.lengthSync() : 0;
     dataSize = dataFile.existsSync() ? dataFile.lengthSync() : 0;
     totalSize = apkSize + dataSize;
