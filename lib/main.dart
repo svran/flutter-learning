@@ -44,13 +44,13 @@ class MyApp extends StatelessWidget {
               appBarTheme: kDebugMode ? AppBarTheme(color: randomColor()) : null,
               fontFamily: "Roboto",
             ),
-            home: const TbListPage(),
-            // home: Scaffold(
-            //   appBar: AppBar(
-            //     title: const Text("这是我学习Flutter的记录"),
-            //   ),
-            //   body: SvranClickBoomWidget(child: const SvranListWidget()),
-            // ),
+            // home: const TbListPage(),
+            home: Scaffold(
+              appBar: AppBar(
+                title: const Text("这是我学习Flutter的记录"),
+              ),
+              body: SvranClickBoomWidget(child: const SvranListWidget()),
+            ),
             supportedLocales: S.delegate.supportedLocales,
             // const [
             //   // 国际化支持
