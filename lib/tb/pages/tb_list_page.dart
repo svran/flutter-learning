@@ -4,17 +4,16 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:svran_flutter_study/ext/toast/svran_toast.dart';
+import 'package:svran_flutter_study/extensions/relative_rect.dart';
+import 'package:svran_flutter_study/tb/model/app_data.dart';
 import 'package:svran_flutter_study/tb/model/properties_model.dart';
-import 'package:svran_flutter_study/tb/pages/apk_list_page.dart';
 import 'package:svran_flutter_study/tb/pages/key_test.dart';
+import 'package:svran_flutter_study/tb/pages/widget/tb_list.dart';
 import 'package:svran_flutter_study/tb/properties.dart';
 import 'package:svran_flutter_study/tb/widget/progress_dialog.dart';
 
 import '../../boom/widget/boom_widget.dart';
 import '../../public_code.dart';
-
-final Map<String, List<PropertiesModel>> tbFileMap = {};
-List<MapEntry<String, List<PropertiesModel>>> tbFileList = [];
 
 class TbListPage extends StatefulWidget {
   const TbListPage({Key? key}) : super(key: key);
@@ -26,6 +25,7 @@ class TbListPage extends StatefulWidget {
 class _TbListPageState extends State<TbListPage> {
   String? dir = "选个路径呗 ->";
   TextEditingController input = TextEditingController();
+  int sort = 0;
 
   void _onKey(RawKeyEvent event) {
     if (event is RawKeyUpEvent) {
@@ -33,7 +33,6 @@ class _TbListPageState extends State<TbListPage> {
     }
     final key = event.data.logicalKey;
     if (key == LogicalKeyboardKey.escape && Navigator.canPop(context)) {
-      logger.d("Svran: Flutter -> 啊啊");
       Navigator.pop(context);
     }
   }
@@ -52,15 +51,76 @@ class _TbListPageState extends State<TbListPage> {
 
   @override
   Widget build(BuildContext context) {
+    Offset offset = Offset.zero;
     return Scaffold(
       appBar: AppBar(
         title: const Text("备份"),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => KeyTest(title: "按键测试")));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => KeyTest(title: "关于")));
             },
             icon: const Icon(Icons.info_outline),
+          ),
+          MouseRegion(
+            onHover: (event) {
+              offset = event.position;
+            },
+            child: IconButton(
+                onPressed: () {
+                  showMenu(
+                    context: context,
+                    position: RelativeRectExt.fromOffsetExt(offset),
+                    items: [
+                      PopupMenuItem(
+                        enabled: sort != 0,
+                        child: const Text('默认(包名排序)'),
+                        onTap: () {
+                          sort = 0;
+                          clearCacheItemIndex();
+                          openFile(sort: sort, refresh: true);
+                        },
+                      ),
+                      PopupMenuItem(
+                        enabled: sort != 1,
+                        child: const Text('备份总大小-降序'),
+                        onTap: () {
+                          sort = 1;
+                          clearCacheItemIndex();
+                          openFile(sort: sort, refresh: true);
+                        },
+                      ),
+                      PopupMenuItem(
+                        enabled: sort != 2,
+                        child: const Text('备份总大小-升序'),
+                        onTap: () {
+                          sort = 2;
+                          clearCacheItemIndex();
+                          openFile(sort: sort, refresh: true);
+                        },
+                      ),
+                      PopupMenuItem(
+                        enabled: sort != 3,
+                        child: const Text('备份数量-降序'),
+                        onTap: () {
+                          sort = 3;
+                          clearCacheItemIndex();
+                          openFile(sort: sort, refresh: true);
+                        },
+                      ),
+                      PopupMenuItem(
+                        enabled: sort != 4,
+                        child: const Text('备份数量-升序'),
+                        onTap: () {
+                          sort = 4;
+                          clearCacheItemIndex();
+                          openFile(sort: sort, refresh: true);
+                        },
+                      ),
+                    ],
+                  );
+                },
+                icon: const Icon(Icons.sort)),
           )
         ],
       ),
@@ -73,7 +133,12 @@ class _TbListPageState extends State<TbListPage> {
               child: Row(
                 children: [
                   Expanded(child: Text(dir ?? "", style: const TextStyle(fontSize: 18))),
-                  ElevatedButton(onPressed: () => openFile(), child: const Text('选择')),
+                  ElevatedButton(
+                      onPressed: () {
+                        clearCacheItemIndex();
+                        openFile(sort: sort);
+                      },
+                      child: const Text('选择')),
                 ],
               ),
             ),
@@ -88,31 +153,21 @@ class _TbListPageState extends State<TbListPage> {
                       decoration: const InputDecoration(hintText: " 包名或者app名"),
                     ),
                   ),
-                  ElevatedButton(onPressed: () => openFile(refresh: true), child: const Text('过滤')),
+                  ElevatedButton(
+                      onPressed: () {
+                        clearCacheItemIndex();
+                        openFile(refresh: true, sort: sort);
+                      },
+                      child: const Text('过滤')),
                 ],
               ),
             ),
             const Divider(height: 1, color: Colors.blue),
             Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  final item = tbFileList[index];
-                  var size = getTotalSize(item.value);
-                  return ListTile(
-                    leading: item.value[0].iconWidget,
-                    title: Text(item.value[0].app_gui_label),
-                    subtitle: (size <= 0)
-                        ? const Text('备份已删除(仅剩下信息文件)')
-                        : Text("有${item.value.length}个数据备份 , 总大小 ${_sizeStr(size)}"),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                        return SvranTbApkListPage(propertiesList: item.value, tbFileListIndex: index);
-                      })).whenComplete(() => setState(() {}));
-                    },
-                  );
+              child: OrientationBuilder(
+                builder: (context, orientation) {
+                  return buildTbList(orientation, () => setState(() {}));
                 },
-                separatorBuilder: (context, index) => const Divider(height: 1),
-                itemCount: tbFileList.length,
               ),
             ),
           ],
@@ -121,39 +176,17 @@ class _TbListPageState extends State<TbListPage> {
     );
   }
 
-  String _sizeStr(int limit) {
-    if (limit <= 0) return "❌";
-    //内存转换
-    if (limit < 1 * 1024) {
-      //小于0.1KB，则转化成B
-      var size = limit.toStringAsFixed(2);
-      return "$size B";
-    } else if (limit < 1 * 1024 * 1024) {
-      //小于0.1MB，则转化成KB
-      var size = (limit / 1024).toStringAsFixed(2);
-      return "$size KB";
-    } else if (limit < 1 * 1024 * 1024 * 1024) {
-      //小于0.1GB，则转化成MB
-      var size = (limit / (1024 * 1024)).toStringAsFixed(2);
-      return "$size MB";
-    } else {
-      //其他转化成GB
-      var size = (limit / (1024 * 1024 * 1024)).toStringAsFixed(2);
-      return "$size GB";
-    }
-  }
-
-  openFile({bool refresh = false}) async {
+  openFile({int sort = 0, bool refresh = false}) async {
     if (refresh) {
-      loadFiles(refresh: refresh);
+      loadFiles(refresh: refresh, sortType: sort, input: input);
       return;
     }
     await Dialogs.showNormalProgressDialog(context, '加载中，请稍后。。。', () async {
-      loadFiles();
+      loadFiles(refresh: refresh, sortType: sort, input: input);
     });
   }
 
-  loadFiles({bool refresh = false}) async {
+  loadFiles({required TextEditingController input, required int sortType, bool refresh = false}) async {
     try {
       if (!refresh) dir = await getDirectoryPath() ?? dir;
       if (dir != null) {
@@ -176,13 +209,45 @@ class _TbListPageState extends State<TbListPage> {
         }
       }
       tbFileList = tbFileMap.entries.toList();
-      tbFileList.sort((a, b) {
-        List<PropertiesModel> ap = a.value;
-        List<PropertiesModel> bp = b.value;
-        var aSize = getTotalSize(ap);
-        var bSize = getTotalSize(bp);
-        return bSize.compareTo(aSize);
-      });
+      switch (sortType) {
+        case 4:
+        case 3:
+          tbFileList.sort((a, b) {
+            var aa = 0;
+            var bb = 0;
+            for (var i = 0; i < a.value.length; ++i) {
+              var item = a.value[i];
+              // 确定当前配置下,存在备份apk或者备份数据,才备份数量增加1
+              if (item.dataFile.existsSync() || item.apkFile.existsSync()) aa++;
+            }
+            for (var i = 0; i < b.value.length; ++i) {
+              var item = b.value[i];
+              if (item.dataFile.existsSync() || item.apkFile.existsSync()) bb++;
+            }
+            if (sortType == 3) {
+              return bb.compareTo(aa);
+            } else {
+              return aa.compareTo(bb);
+            }
+          });
+          break;
+        case 2: // 总大小排序,1 降序 2 升序
+        case 1: // 总大小排序,1 降序 2 升序
+          tbFileList.sort((a, b) {
+            List<PropertiesModel> ap = a.value;
+            List<PropertiesModel> bp = b.value;
+            var aSize = dataGetTotalSize(ap);
+            var bSize = dataGetTotalSize(bp);
+            if (sortType == 1) {
+              return bSize.compareTo(aSize);
+            } else {
+              return aSize.compareTo(bSize);
+            }
+          });
+          break;
+        default:
+          logger.d("默认排序");
+      }
       setState(() {});
     } catch (error) {
       if (error.runtimeType == FileSystemException) {
@@ -191,18 +256,5 @@ class _TbListPageState extends State<TbListPage> {
       }
       svranToast("错误:$error");
     }
-  }
-
-  int getTotalSize(List<PropertiesModel> list) {
-    var size = 0;
-    var lastApkName = "";
-    for (var i = 0; i < list.length; ++i) {
-      if (lastApkName != list[i].app_apk_md5) {
-        size = list[i].apkSize;
-        lastApkName = list[i].app_apk_md5;
-      }
-      size += list[i].dataSize;
-    }
-    return size;
   }
 }

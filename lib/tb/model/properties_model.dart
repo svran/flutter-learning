@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:svran_flutter_study/tb/model/app_data.dart';
 import 'package:svran_flutter_study/tb/properties.dart';
 
 class PropertiesModel {
@@ -61,7 +62,7 @@ class PropertiesModel {
   void _extData() {
     final path = file.path;
     String fileName = path.replaceAll("\\", "/").split("/").last;
-    String fileLast = fileName.split("-").last;
+    // String fileLast = fileName.split("-").last;
     List<String> fileNameSplit = fileName.split("-");
     packageName = fileNameSplit.first;
     date = fileNameSplit[1];
@@ -88,33 +89,11 @@ class PropertiesModel {
     totalSize = apkSize + dataSize;
   }
 
-  String apkSizeStr() => _sizeStr(apkSize);
+  String apkSizeStr() => sizeToStr(apkSize);
 
-  String dataSizeStr() => _sizeStr(dataSize);
+  String dataSizeStr() => sizeToStr(dataSize);
 
-  String totalSizeStr() => _sizeStr(apkSize + dataSize);
-
-  String _sizeStr(int limit) {
-    if (limit == 0) return "❌";
-    //内存转换
-    if (limit < 1 * 1024) {
-      //小于0.1KB，则转化成B
-      var size = limit.toStringAsFixed(2);
-      return "$size B";
-    } else if (limit < 1 * 1024 * 1024) {
-      //小于0.1MB，则转化成KB
-      var size = (limit / 1024).toStringAsFixed(2);
-      return "$size KB";
-    } else if (limit < 1 * 1024 * 1024 * 1024) {
-      //小于0.1GB，则转化成MB
-      var size = (limit / (1024 * 1024)).toStringAsFixed(2);
-      return "$size MB";
-    } else {
-      //其他转化成GB
-      var size = (limit / (1024 * 1024 * 1024)).toStringAsFixed(2);
-      return "$size GB";
-    }
-  }
+  String totalSizeStr() => sizeToStr(apkSize + dataSize);
 
   bool contains(String nameOrPackage) {
     return nameOrPackage.isEmpty || packageName.contains(nameOrPackage) || (app_label).contains(nameOrPackage);
@@ -134,7 +113,7 @@ class PropertiesModel {
         // a..f
         val += (hexDigit - 87) * (1 << (4 * (len - 1 - i)));
       } else {
-        throw new FormatException("Invalid hexadecimal value");
+        throw const FormatException("Invalid hexadecimal value");
       }
     }
     return val;
