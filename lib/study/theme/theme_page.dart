@@ -55,7 +55,7 @@ class _SvranThemeDemoPageState extends State<SvranThemeDemoPage> {
                   onChanged: (value) {},
                   activeColor: Colors.blue,
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () {},
                   child: Text('这是啥按钮'),
                 ),
